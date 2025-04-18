@@ -1,5 +1,9 @@
 # SmartFill.AI - 智能简历自动填充工具
 
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://zyxcambridge.github.io/autofilltable/)
+
+[查看项目网站](https://zyxcambridge.github.io/autofilltable/)
+
 ## 简介
 该工具利用LLM（大语言模型）技术，智能识别表单字段并自动填充个人简历信息。支持通过右键菜单在任意应用程序中快速填充信息，提高求职效率。
 
