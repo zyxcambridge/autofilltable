@@ -5,7 +5,7 @@
 [查看项目网站](https://zyxcambridge.github.io/autofilltable/)
 
 > 注意：如果页面显示404错误，请确保GitHub Pages设置为使用gh-pages分支。
-
+<!-- 增加默认密码 he  Email 一个级别，也可以修改  ：Xuexi_2025 -->
 ## 简介
 该工具利用LLM（大语言模型）技术，智能识别表单字段并自动填充个人简历信息。支持通过右键菜单在任意应用程序中快速填充信息，提高求职效率。
 

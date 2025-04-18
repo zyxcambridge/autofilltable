@@ -4,7 +4,7 @@
  */
 
 // Resume data (loaded from profiles/default.json)
-const resumeData = {
+let resumeData = {
   "basic": {
     "name": "李明华",
     "gender": "男",
@@ -135,21 +135,21 @@ function detectFieldType(element) {
   const placeholder = element.placeholder ? element.placeholder.toLowerCase() : "";
   const ariaLabel = element.getAttribute("aria-label") ? element.getAttribute("aria-label").toLowerCase() : "";
   const type = element.type ? element.type.toLowerCase() : "";
-  
+
   // Get label text if there's a label associated with this field
   let labelText = "";
-  
+
   // Check for explicit label
   const labelElement = document.querySelector(`label[for="${element.id}"]`);
   if (labelElement) {
     labelText = labelElement.textContent.toLowerCase();
   }
-  
+
   // Check for parent label
   if (!labelText && element.closest('label')) {
     labelText = element.closest('label').textContent.toLowerCase();
   }
-  
+
   // Check for preceding text
   if (!labelText) {
     // Look for text nodes or elements that might be labels
@@ -158,36 +158,36 @@ function detectFieldType(element) {
       labelText = previousElement.textContent.toLowerCase();
     }
   }
-  
+
   // Check for nearby headings or divs that might contain field labels
   if (!labelText) {
     const nearbyElements = element.parentElement.querySelectorAll('h1, h2, h3, h4, h5, h6, div, span, p');
     for (const nearby of nearbyElements) {
-      if (nearby !== element && 
-          !nearby.querySelector('input, select, textarea') && 
+      if (nearby !== element &&
+          !nearby.querySelector('input, select, textarea') &&
           nearby.textContent.length < 50) {
         labelText = nearby.textContent.toLowerCase();
         break;
       }
     }
   }
-  
+
   // Combine all text for matching
   const allText = `${id} ${name} ${placeholder} ${labelText} ${ariaLabel} ${type}`;
-  
+
   // Check for special cases
   if (type === "email") {
     return "email";
   }
-  
+
   if (type === "password") {
     return "password";
   }
-  
+
   if (type === "tel") {
     return "phone";
   }
-  
+
   // Check against patterns
   for (const [fieldType, fieldInfo] of Object.entries(fieldPatterns)) {
     for (const pattern of fieldInfo.patterns) {
@@ -197,7 +197,7 @@ function detectFieldType(element) {
       }
     }
   }
-  
+
   // Special case for Workday forms
   if (window.location.hostname.includes("workday")) {
     // Workday often has specific patterns in their form structure
@@ -206,7 +206,7 @@ function detectFieldType(element) {
       "password": ["password", "create password", "new password"],
       "verify_password": ["verify", "confirm", "re-enter"]
     };
-    
+
     for (const [fieldType, patterns] of Object.entries(workdayFieldMap)) {
       for (const pattern of patterns) {
         if (allText.includes(pattern)) {
@@ -216,7 +216,7 @@ function detectFieldType(element) {
       }
     }
   }
-  
+
   return null;
 }
 
@@ -226,37 +226,37 @@ function fillField(element, fieldType) {
     console.log("Unknown field type:", fieldType);
     return;
   }
-  
+
   const value = fieldPatterns[fieldType].getValue();
   if (!value) {
     console.log(`No value available for field type: ${fieldType}`);
     return;
   }
-  
+
   // Set the value
   element.value = value;
-  
+
   // Trigger input event to notify the form that the value has changed
   element.dispatchEvent(new Event('input', { bubbles: true }));
   element.dispatchEvent(new Event('change', { bubbles: true }));
-  
+
   console.log(`Filled ${fieldType} with: ${value}`);
 }
 
 // Handle field focus
 function handleFieldFocus(event) {
   const element = event.target;
-  
+
   // Only process input elements, textareas, and select elements
   if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA' && element.tagName !== 'SELECT') {
     return;
   }
-  
+
   // Skip if the element already has a value
   if (element.value) {
     return;
   }
-  
+
   // Detect field type
   const fieldType = detectFieldType(element);
   if (fieldType) {
@@ -268,17 +268,17 @@ function handleFieldFocus(event) {
 // Handle field click (alternative to focus)
 function handleFieldClick(event) {
   const element = event.target;
-  
+
   // Only process input elements, textareas, and select elements
   if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA' && element.tagName !== 'SELECT') {
     return;
   }
-  
+
   // Skip if the element already has a value
   if (element.value) {
     return;
   }
-  
+
   // Detect field type
   const fieldType = detectFieldType(element);
   if (fieldType) {
@@ -290,24 +290,92 @@ function handleFieldClick(event) {
 // Initialize the extension
 function initialize() {
   console.log("SmartFill.AI - Resume Auto-Fill initialized");
-  
+  console.log("Current resume data:", resumeData);
+
+  // Expose resumeData for debugging
+  window._smartfillResumeData = resumeData;
+
+  // Load user data from storage
+  if (chrome && chrome.storage && chrome.storage.sync) {
+    chrome.storage.sync.get(['userName', 'userEmail', 'userPhone'], function(result) {
+      console.log('Loaded user data from storage:', result);
+
+      // Update resumeData with user data
+      if (result.userName) {
+        resumeData.basic.name = result.userName;
+      }
+
+      if (result.userEmail) {
+        resumeData.basic.email = result.userEmail;
+      }
+
+      if (result.userPhone) {
+        resumeData.basic.phone = result.userPhone;
+      }
+
+      console.log('Updated resume data:', resumeData);
+
+      // Update exposed resumeData for debugging
+      window._smartfillResumeData = resumeData;
+    });
+  } else {
+    console.warn('Chrome storage API not available');
+  }
+
   // Add event listeners for focus and click events
   document.addEventListener('focus', handleFieldFocus, true);
   document.addEventListener('click', handleFieldClick, true);
-  
+
   // Process all visible form fields on page load
   setTimeout(() => {
+    console.log('Processing form fields with data:', resumeData);
     const formFields = document.querySelectorAll('input, textarea, select');
     formFields.forEach(field => {
       if (!field.value && field.offsetParent !== null) { // Check if visible
         const fieldType = detectFieldType(field);
         if (fieldType) {
+          console.log(`Auto-filling field type ${fieldType} with:`, fieldPatterns[fieldType].getValue());
           fillField(field, fieldType);
         }
       }
     });
-  }, 1000); // Wait 1 second for the page to fully load
+  }, 2000); // Wait 2 seconds for the page to fully load and data to be updated
 }
+
+// Listen for messages from popup
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'updateProfile') {
+    console.log('Received profile update:', message);
+
+    // Update user data if provided
+    if (message.userData) {
+      // Update name if provided
+      if (message.userData.name) {
+        resumeData.basic.name = message.userData.name;
+        console.log('Updated name to:', resumeData.basic.name);
+      }
+
+      // Update email if provided
+      if (message.userData.email) {
+        resumeData.basic.email = message.userData.email;
+        console.log('Updated email to:', resumeData.basic.email);
+      }
+
+      // Update phone number if provided
+      if (message.userData.phone) {
+        resumeData.basic.phone = message.userData.phone;
+        console.log('Updated phone number to:', resumeData.basic.phone);
+      }
+
+      // Update exposed resumeData for debugging
+      window._smartfillResumeData = resumeData;
+    }
+
+    // Send response
+    sendResponse({ success: true });
+  }
+  return true; // Keep the message channel open for async response
+});
 
 // Start the extension
 initialize();
