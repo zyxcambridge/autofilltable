@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="20" fill="#4a6baf"/>
+  <text x="64" y="80" font-family="Arial, sans-serif" font-size="50" font-weight="bold" text-anchor="middle" fill="white">S.AI</text>
+  <path d="M30,40 L98,40 L98,88 L30,88 Z" fill="none" stroke="white" stroke-width="3" stroke-dasharray="6,3"/>
+  <path d="M45,55 L83,55 M45,65 L83,65 M45,75 L83,75" stroke="white" stroke-width="2"/>
+  <circle cx="35" cy="55" r="3" fill="white"/>
+  <circle cx="35" cy="65" r="3" fill="white"/>
+  <circle cx="35" cy="75" r="3" fill="white"/>
+  <path d="M93,55 L88,52 L88,58 Z" fill="white"/>
+  <path d="M93,65 L88,62 L88,68 Z" fill="white"/>
+  <path d="M93,75 L88,72 L88,78 Z" fill="white"/>
+</svg>

@@ -1,0 +1,29 @@
+/**
+ * SmartFill.AI - Resume Auto-Fill
+ * Content styles
+ */
+
+/* Highlight fields that have been auto-filled */
+.smartfill-autofilled {
+  border: 1px solid #28a745 !important;
+  box-shadow: 0 0 3px rgba(40, 167, 69, 0.5) !important;
+  transition: all 0.3s ease;
+}
+
+/* Tooltip styles */
+.smartfill-tooltip {
+  position: absolute;
+  background-color: #4a6baf;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.smartfill-tooltip.show {
+  opacity: 1;
+}

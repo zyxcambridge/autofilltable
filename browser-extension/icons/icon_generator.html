@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartFill.AI Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .icon-container {
+            margin: 20px;
+            display: inline-block;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 5px 10px;
+            background: #4a6baf;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>SmartFill.AI Icon Generator</h1>
+    <p>右键点击下面的图标并选择"保存图片"，将它们保存为相应的文件名。</p>
+    
+    <div class="icon-container">
+        <canvas id="icon16" width="16" height="16"></canvas>
+        <br>
+        <button onclick="downloadIcon(16)">下载 icon16.png</button>
+    </div>
+    
+    <div class="icon-container">
+        <canvas id="icon48" width="48" height="48"></canvas>
+        <br>
+        <button onclick="downloadIcon(48)">下载 icon48.png</button>
+    </div>
+    
+    <div class="icon-container">
+        <canvas id="icon128" width="128" height="128"></canvas>
+        <br>
+        <button onclick="downloadIcon(128)">下载 icon128.png</button>
+    </div>
+    
+    <script>
+        function drawIcon(size) {
+            const canvas = document.getElementById(`icon${size}`);
+            const ctx = canvas.getContext('2d');
+            
+            // 背景
+            ctx.fillStyle = '#4a6baf';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.15);
+            ctx.fill();
+            
+            // 文字
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.4}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('S.AI', size / 2, size / 2);
+            
+            // 表单线条
+            const margin = size * 0.2;
+            const width = size - 2 * margin;
+            const height = size * 0.6;
+            
+            ctx.strokeStyle = 'white';
+            ctx.setLineDash([size * 0.05, size * 0.025]);
+            ctx.strokeRect(margin, margin, width, height);
+            
+            // 表单行
+            ctx.setLineDash([]);
+            const lineY1 = margin + height * 0.3;
+            const lineY2 = margin + height * 0.5;
+            const lineY3 = margin + height * 0.7;
+            
+            ctx.beginPath();
+            ctx.moveTo(margin + size * 0.15, lineY1);
+            ctx.lineTo(margin + width - size * 0.15, lineY1);
+            ctx.moveTo(margin + size * 0.15, lineY2);
+            ctx.lineTo(margin + width - size * 0.15, lineY2);
+            ctx.moveTo(margin + size * 0.15, lineY3);
+            ctx.lineTo(margin + width - size * 0.15, lineY3);
+            ctx.stroke();
+            
+            // 圆点
+            ctx.beginPath();
+            ctx.arc(margin + size * 0.07, lineY1, size * 0.03, 0, Math.PI * 2);
+            ctx.arc(margin + size * 0.07, lineY2, size * 0.03, 0, Math.PI * 2);
+            ctx.arc(margin + size * 0.07, lineY3, size * 0.03, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 箭头
+            const arrowX = margin + width - size * 0.07;
+            const arrowSize = size * 0.04;
+            
+            ctx.beginPath();
+            ctx.moveTo(arrowX, lineY1);
+            ctx.lineTo(arrowX - arrowSize, lineY1 - arrowSize);
+            ctx.lineTo(arrowX - arrowSize, lineY1 + arrowSize);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(arrowX, lineY2);
+            ctx.lineTo(arrowX - arrowSize, lineY2 - arrowSize);
+            ctx.lineTo(arrowX - arrowSize, lineY2 + arrowSize);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(arrowX, lineY3);
+            ctx.lineTo(arrowX - arrowSize, lineY3 - arrowSize);
+            ctx.lineTo(arrowX - arrowSize, lineY3 + arrowSize);
+            ctx.closePath();
+            ctx.fill();
+        }
+        
+        function downloadIcon(size) {
+            const canvas = document.getElementById(`icon${size}`);
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // 绘制所有图标
+        drawIcon(16);
+        drawIcon(48);
+        drawIcon(128);
+    </script>
+</body>
+</html>
