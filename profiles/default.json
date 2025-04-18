@@ -1,0 +1,108 @@
+{
+  "version": "1.0",
+  "data": {
+    "basic": {
+      "name": "李明华",
+      "gender": "男",
+      "birth_year": "1992",
+      "email": "example@email.com",
+      "phone": "13800138000",
+      "location": "Beijing"
+    },
+    "education": [
+      {
+        "period": "2011.09-2015.06",
+        "school": "Sample University",
+        "degree": "Bachelor",
+        "major": "Computer Science"
+      }
+    ],
+    "work_experience": [
+      {
+        "company": "示例科技（北京）有限公司",
+        "period": "2023.03-2024.01",
+        "title": "Machine Learning Engineer",
+        "highlights": [
+          "参与自动驾驶感知算法开发与优化",
+          "负责模型选型与评估，完成多种模型的benchmark测试",
+          "设计并实现模型部署流程，提高团队工作效率30%"
+        ]
+      },
+      {
+        "company": "智能技术（北京）有限公司",
+        "period": "2020.06-2023.02",
+        "title": "Algorithm Engineer",
+        "highlights": [
+          "领导5人团队开发计算机视觉算法",
+          "基于边缘计算设备实现实时目标检测，性能提升40%",
+          "开发内部工具提高团队效率，获得年度创新奖"
+        ]
+      },
+      {
+        "company": "Example Technology Co., Ltd",
+        "period": "2017.05-2020.05",
+        "title": "Software Engineer",
+        "highlights": [
+          "负责开发和维护核心算法模块",
+          "设计高效的数据处理流程，处理速度提升3倍",
+          "参与多个客户项目，成功交付15个重要项目"
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "智能客服助手",
+        "description": "企业级AI客服解决方案",
+        "highlights": [
+          "负责对话系统设计与实现",
+          "集成多模态理解能力，提高用户体验",
+          "支持多Agent协作处理复杂问题"
+        ]
+      },
+      {
+        "name": "AI面试助手",
+        "achievement": "区域创新大赛优秀奖",
+        "highlights": [
+          "开发求职者与招聘方智能匹配系统",
+          "实现自动化简历筛选，效率提升5倍",
+          "系统日均处理上万份简历"
+        ]
+      }
+    ],
+    "skills": {
+      "ai_frameworks": [
+        "PyTorch",
+        "TensorFlow",
+        "Hugging Face",
+        "LangChain",
+        "ONNX"
+      ],
+      "hardware": [
+        "GPU(V100,A100)",
+        "FPGA(基础应用)",
+        "边缘计算设备"
+      ],
+      "certifications": [
+        "人工智能工程师认证"
+      ],
+      "achievements": [
+        "主持技术分享会20场，累计参与人数超过5000人"
+      ]
+    },
+    "portfolio": {
+      "personal_website": "https://example-portfolio.com",
+      "projects": [
+        {
+          "name": "3D生成助手",
+          "url": "https://example-project1.com",
+          "description": "基于AI技术的3D模型自动生成工具，提高建模效率"
+        },
+        {
+          "name": "健康助手应用",
+          "url": "https://example-project2.com",
+          "description": "结合多种AI技术开发的健康管理应用"
+        }
+      ]
+    }
+  }
+}
