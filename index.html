@@ -3,10 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0;url=docs/index.html">
     <title>SmartFill.AI - Resume Auto-Fill Tool</title>
+    <link rel="stylesheet" href="docs/css/styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #4a6baf;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 4rem 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #6c757d;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        .features {
+            padding: 4rem 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #4a6baf;
+        }
+
+        footer {
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <p>If you are not redirected automatically, follow this <a href="docs/index.html">link to SmartFill.AI</a>.</p>
+    <header>
+        <div class="container">
+            <h1>SmartFill.AI</h1>
+            <p>Intelligent Resume Auto-Fill Tool for macOS</p>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Streamline Your Job Applications</h2>
+            <p>SmartFill.AI uses advanced AI technology to automatically fill in job application forms with your resume information. Save time and reduce errors when applying for jobs.</p>
+            <a href="https://github.com/zyxcambridge/autofilltable" class="btn">View on GitHub</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Right-Click Integration</h3>
+                    <p>Access SmartFill.AI directly from the right-click context menu in any application, making it easy to fill forms in browsers, documents, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Intelligent Field Detection</h3>
+                    <p>Automatically identifies form field types (name, email, phone, education, work experience, etc.) based on context and labels.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multi-Language Support</h3>
+                    <p>Works with both English and Chinese field labels, making it versatile for international job applications.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Privacy-Focused</h3>
+                    <p>All personal information is stored locally on your computer, ensuring your data remains private and secure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SmartFill.AI | <a href="https://github.com/zyxcambridge/autofilltable">GitHub Repository</a></p>
+        </div>
+    </footer>
 </body>
 </html>
